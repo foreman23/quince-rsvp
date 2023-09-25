@@ -1,5 +1,12 @@
-.body {
-  background-color: white;
+body {
+  background-color: #e6e6e6 !important;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+  background-image: url(../public/forestBG.webp);
+  background-size: cover;
 }
 
 .FormContainer {
@@ -17,4 +24,104 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.MainContainer {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 6vh;
+  align-items: center;
+  width: 35vw;
+}
+
+.EnglishButton {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #D2D2D2;
+  border-radius: 32.5px;
+  border-width: 1px;
+  width: 10vw;
+  color: black;
+  margin-bottom: 20px;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.EnglishButton:hover {
+  cursor: pointer;
+  background-color: #5A8F7B;
+  color: white;
+}
+
+.SpanishButton:hover {
+  cursor: pointer;
+  background-color: #5A8F7B;
+  color: white;
+}
+
+.SpanishButton {
+  display: flex;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  border-color: #D2D2D2;
+  border-radius: 32.5px;
+  border-width: 1px;
+  width: 10vw;
+  color: black;
+  padding-right: 25px;
+  padding-left: 25px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.LanguageText {
+  font-size: 22px;
+  padding: 5px;
+}
+
+.MainImage {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.MainHeader {
+  margin-top: 10px;
+  color: black;
+  width: 35%;
+}
+
+.MainHeaderTop {
+  margin-top: 20px;
+  color: black;
+  width: 35%;
+}
+
+.MainHeaderH1 {
+  font-size: 64px;
+  margin-bottom: -4px;
+}
+
+.DividerMain {
+  width: 45%;
+}
+
+.ButtonContainer {
+  margin-top: 40px;
+}
+
+.countdownTimer {
+  margin-bottom: 17px;
+  margin-top: 12px;
+  color: #5A8F7B;
+  font-weight: 600;
+  font-size: large;
 }
