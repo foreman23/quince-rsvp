@@ -1,5 +1,5 @@
 import './App.css';
-import { Form, Checkbox, Button, Input, Header, Image, Divider, Icon } from 'semantic-ui-react';
+import { Form, Checkbox, Button, Input, Header, Image, Divider, Icon, List } from 'semantic-ui-react';
 import { firestore } from './firebase';
 import { useState } from 'react';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -17,6 +17,12 @@ function Main() {
     const [email, setEmail] = useState('');
     const [isAttending, setIsAttending] = useState(null);
 
+    const chooseLanguage = (chosenLanguage) => {
+        setLanguage(chosenLanguage);
+    }
+
+
+    // Submit RSVP
     const submitRSVP = async () => {
         console.log(name, partyCount, email, isAttending)
         // Set data map for user response
@@ -68,7 +74,6 @@ function Main() {
 
     }
 
-    
 
     if (language === null) {
         return (
@@ -78,17 +83,17 @@ function Main() {
                 <Image className='MainImage' circular size='medium' src='./portraits/IMG-3316_1.webp' />
                 <Countdown className='countdownTimer' date={1702162800000} />
 
-                    <h3 className='MainHeaderTop'>You're Invited to Melanie's Quinceañera!</h3>
-                    <Divider className='DividerMain' horizontal>
-                        <Icon name='heart'></Icon>
-                        <Icon name='heart outline'></Icon>
-                        <Icon name='heart'></Icon>
-                    </Divider>
-                    <h3 className='MainHeader'>¡Estás invitado a la quinceañera de Melanie!</h3>
+                <h3 className='MainHeaderTop'>You're Invited to Melanie's Quinceañera!</h3>
+                <Divider className='DividerMain' horizontal>
+                    <Icon name='heart'></Icon>
+                    <Icon name='heart outline'></Icon>
+                    <Icon name='heart'></Icon>
+                </Divider>
+                <h3 className='MainHeader'>¡Estás invitado a la quinceañera de Melanie!</h3>
 
                 <div className='ButtonContainer'>
-                    <a className='EnglishButton' onClick={() => setLanguage("english")}><text className='LanguageText'>RSVP English</text></a>
-                    <a className='SpanishButton' onClick={() => setLanguage("spanish")}><text className='LanguageText'>RSVP Español</text></a>
+                    <a className='EnglishButton' onClick={() => chooseLanguage("english")}><text className='LanguageText'>RSVP English</text></a>
+                    <a className='SpanishButton' onClick={() => chooseLanguage("spanish")}><text className='LanguageText'>RSVP Español</text></a>
                 </div>
             </div>
         )
@@ -96,15 +101,48 @@ function Main() {
 
     if (language === "english") {
         return (
-            <div className='MainContainer'>
-                <Button href={'/'}>Back</Button>
-                {/* Header stuff */}
+            <div>
+
+                <Button className='BackButton' onClick={() => chooseLanguage(null)}>Back</Button>
+
+                <div className='MainContainer2'>
+
+
+                {/* Event Details */}
+                <div className='DetailsContainer'>
+                    <List bulleted>
+                        <List.Item>
+                            
+                            <List.Header><List.Icon name='calendar outline'></List.Icon>Date:</List.Header>December 9th, 2023
+                        </List.Item>
+                        <List.Item>
+                            <List.Header><List.Icon name='clock outline'></List.Icon>Time of Event:</List.Header>
+                            3:00pm - 11pm
+                        </List.Item>
+                        <List.Item>
+                            <List.Header><List.Icon name='food'></List.Icon>Food Reception:</List.Header>
+                            4:00pm - 6pm
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Dress Code:</List.Header>
+                            <text className='BlackText'>BLACK</text> and <text className='GreenText'>FOREST GREEN</text> <b>ONLY</b>
+                            <br></br><b><u>no other colors allowed!</u></b>
+                        </List.Item>
+    
+                    </List>
+                </div>
+                </div>
+
+
+                {/* Form Header stuff */}
                 <div className='RSVPheader'>
                     <text>Are you attending?</text>
                     <text>RSVP by: <b>November 1st 2023</b></text>
                     <text>{`We have reserved ____ amount of seats in your honor.`}</text>
                     <text>{`____ out of ____ guests are attending.`}</text>
                 </div>
+
+
 
                 {/* Form area */}
                 <div className='FormContainer'>
@@ -155,7 +193,7 @@ function Main() {
     if (language === "spanish") {
         return (
             <div className='MainContainer'>
-                <Button href={'/'}>Back</Button>
+                <Button onClick={() => chooseLanguage(null)}>Back</Button>
                 {/* Header stuff */}
                 <div className='RSVPheader'>
                     <text>¿Estas atendiendo?</text>

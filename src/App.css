@@ -36,6 +36,16 @@ html {
   width: 35vw;
 }
 
+.MainContainer2 {
+  display: flex;
+  justify-content: center;
+  text-align: start;
+  flex-direction: column;
+  margin-top: 6vh;
+  align-items: center;
+  width: 35vw;
+}
+
 .EnglishButton {
   display: flex;
   background-color: white;
@@ -91,6 +101,10 @@ html {
 .MainImage {
   margin-top: 10px;
   margin-bottom: 10px;
+  border-width: 5px;
+  border-color: #f4f4f4;
+  border-style: solid;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.11);
 }
 
 .MainHeader {
@@ -124,4 +138,24 @@ html {
   color: #5A8F7B;
   font-weight: 600;
   font-size: large;
+}
+
+.DetailsContainer {
+  margin-bottom: 40px;
+}
+
+.BlackText {
+  background-color: black;
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 5px;
+}
+
+.GreenText {
+  background-color: #5A8F7B;
+  color: white;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 5px;
 }
