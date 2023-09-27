@@ -1,5 +1,6 @@
 body {
   background-color: #e6e6e6 !important;
+  min-height: 100%;
 }
 
 html {
@@ -7,16 +8,24 @@ html {
   justify-content: center;
   background-image: url(../public/forestBG.webp);
   background-size: cover;
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  height: 100%;
+  
 }
 
 .FormContainer {
-  display: flex;
-  justify-content: center;
   text-align: center;
+  padding-bottom: 50px;
+  border-style: solid;
+  border-color: #D2D2D2;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #BFCEBE;
 }
 
 .RSVPform {
-  width: 30vw;
+  width: 20vw;
 }
 
 .RSVPheader {
@@ -43,7 +52,8 @@ html {
   flex-direction: column;
   margin-top: 6vh;
   align-items: center;
-  width: 35vw;
+  width: 35vw !important;
+  background-color: #e6e6e6;
 }
 
 .EnglishButton {
@@ -107,6 +117,13 @@ html {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.11);
 }
 
+.OutfitsImage {
+  border-width: 5px;
+  border-color: #f4f4f4;
+  border-style: solid;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.11);
+}
+
 .MainHeader {
   margin-top: 10px;
   color: black;
@@ -128,6 +145,10 @@ html {
   width: 45%;
 }
 
+.DividerRSVP {
+  width: 45%;
+}
+
 .ButtonContainer {
   margin-top: 40px;
 }
@@ -142,6 +163,30 @@ html {
 
 .DetailsContainer {
   margin-bottom: 40px;
+  text-align: start;
+  margin-left: 55px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.DetailsContainerCol1 {
+  text-align: center;
+  padding: 10px;
+  align-items: center;
+}
+
+.DresscodeContainer {
+  margin-bottom: 40px;
+  text-align: start;
+  margin-left: 55px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .BlackText {
@@ -158,4 +203,47 @@ html {
   padding-left: 2px;
   padding-right: 2px;
   border-radius: 5px;
+}
+
+.BackButton {
+  margin-left: 6% !important;
+  margin-top: 5% !important;
+  background-color: white !important;
+  color: black !important;
+}
+
+.BackButton:hover {
+  background-color: #5A8F7B !important;
+  color: white !important;
+}
+
+.InvitationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.DresscodeContainer {
+  justify-content: center;
+  margin: auto;
+  margin: 50px;
+}
+
+
+/* carousel component */
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+}
+.embla__slide {
+  flex: 0 0 40%;
+  min-width: 0;
+  justify-content: center;
+  display: flex;
+  margin-right: 20px;
 }
