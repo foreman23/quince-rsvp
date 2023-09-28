@@ -143,8 +143,8 @@ function DetailsSpanish() {
                     </Row>
                     <Row>
                         <Col>
-                            <Col><h3 className='FontText PleaseWear'>Por favor <b>NEGRO</b> y <br></br>
-                                <b style={{ color: '#5A8F7B' }}>SÓLO VERDE</b> oscuro</h3>
+                            <Col><h3 className='FontText PleaseWear'>Por favor, vistan de <b>NEGRO</b> y <br></br>
+                                <b style={{ color: '#5A8F7B' }}>VERDE BOSQUE</b> SOLAMENTE</h3>
                                 <h4 className='FontHeader'>- Gracias</h4>
                             </Col>
                         </Col>
