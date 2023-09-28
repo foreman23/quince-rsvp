@@ -1,6 +1,7 @@
 body {
   background-color: #e6e6e6 !important;
   min-height: 100%;
+  color: #212427 !important;
 }
 
 html {
@@ -43,8 +44,40 @@ html {
   flex-direction: column;
   margin-top: 3.5vh;
   align-items: center;
-  width: 35vw;
   background-color: #e6e6e6;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .MainContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 3.5vh;
+    align-items: center;
+    background-color: #e6e6e6;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .MainContainer2 {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 6vh;
+    align-items: center;
+    background-color: #e6e6e6;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .RSVPform {
+    width: 90vw;
+  }
+  .HideOnMobile {
+    display: none;
+  }
 }
 
 .MainContainer2 {
@@ -54,17 +87,33 @@ html {
   flex-direction: column;
   margin-top: 6vh;
   align-items: center;
-  width: 35vw !important;
   background-color: #e6e6e6;
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
 @media (min-width: 1200px) {
-  .MainWidth {
+  .MainWidth1 {
     width: 30vw !important;
   }
+  .MainWidth2 {
+    width: 35vw !important;
+  }
 }
+
+
+@media (max-width: 767px) {
+  .MainWidth1 {
+    width: 100vw !important;
+    background-color: #e6e6e6;
+  }
+  .MainWidth2 {
+    width: 100vw !important;
+    background-color: #e6e6e6;
+    overflow: hidden;
+  }
+}
+
 
 .EnglishButton {
   display: flex;
@@ -113,6 +162,10 @@ html {
   padding-top: 12px;
   padding-bottom: 12px;
   text-decoration: none;
+}
+
+.HeaderTextShadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 767px) {
@@ -202,6 +255,11 @@ html {
     color: black;
     width: 70%;
   }
+  .DetailsContainerCol1 {
+    text-align: start !important;
+    padding: 10px;
+    align-items: center;
+  }
 }
 
 .YoureInvitedContainer {
@@ -241,17 +299,31 @@ html {
   flex-wrap: nowrap;
   align-items: flex-start;
   background-color: white;
-  border-radius: 5px;
+  justify-content: center;
 }
 
 .DetailsContainerCol1 {
   text-align: center;
   padding: 10px;
   align-items: center;
+  font-size: 14px;
 }
 
 .DetailsContainerCol2 {
   padding-right: 0 !important;
+}
+
+.DetailsListItem {
+  margin-bottom: 4px;
+}
+
+.CropImageTown {
+  background-image: url('../public/clip-art/town.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
 }
 
 .DresscodeContainer {

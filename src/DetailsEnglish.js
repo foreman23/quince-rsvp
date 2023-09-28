@@ -1,8 +1,8 @@
 import './App.css';
 import { Form, Checkbox, Button, Input, Header, Image, Divider, Icon, List } from 'semantic-ui-react';
 import { firestore } from './firebase';
-import { useState } from 'react';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { arrayUnion, collection, doc, getDoc, updateDoc, getDocs } from 'firebase/firestore';
 import Countdown from 'react-countdown';
 import Carousel from './components/Carousel';
 import { Col, Container, Row } from 'react-bootstrap';
@@ -10,21 +10,29 @@ import { Col, Container, Row } from 'react-bootstrap';
 function DetailsEnglish() {
 
     // State variables for form
-    const [name, setName] = useState('');
-    const [partyCount, setPartyCount] = useState(0);
-    const [email, setEmail] = useState('');
+    const [name, setName] = useState(null);
+    const [partyCount, setPartyCount] = useState(null);
+    const [email, setEmail] = useState(null);
     const [isAttending, setIsAttending] = useState(null);
 
 
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    const [warning, setWarning] = useState(false);
     // Submit RSVP
     const submitRSVP = async () => {
-        console.log(name, partyCount, email, isAttending)
         // Set data map for user response
         const formData = {
             name: name,
             partyCount: partyCount,
             email: email,
             isAttending: isAttending,
+        }
+
+        // First check for all required inputs
+        if (name === null || partyCount === null || email === null || isAttending === null) {
+            console.log('No null values!')
+            setWarning(true);
+            return
         }
 
         // If user IS attending
@@ -34,6 +42,7 @@ function DetailsEnglish() {
                 await updateDoc(docRef, {
                     guestArr: arrayUnion(formData)
                 });
+                setFormSubmitted(true);
             }
             catch (error) {
                 console.error("Error adding user RSVP:", error);
@@ -47,19 +56,7 @@ function DetailsEnglish() {
                 await updateDoc(docRef, {
                     guestArr: arrayUnion(formData)
                 });
-            }
-            catch (error) {
-                console.error("Error adding user RSVP:", error);
-            }
-        }
-
-        // If user MAYBE attending
-        if (isAttending === "maybe") {
-            const docRef = doc(firestore, "guests", "maybe");
-            try {
-                await updateDoc(docRef, {
-                    guestArr: arrayUnion(formData)
-                });
+                setFormSubmitted(true);
             }
             catch (error) {
                 console.error("Error adding user RSVP:", error);
@@ -68,16 +65,50 @@ function DetailsEnglish() {
 
     }
 
+    // Gets seat taken count from firestore
+    const [seatsTaken, setSeatsTaken] = useState(null);
+    const getSeatCount = async () => {
+        const querySnapshot = await getDocs(collection(firestore, "guests")); 
+        let guestMap = {
+            attendingArr: [],
+            not_attendingArr: [],
+        }
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            //console.log(doc.id, " => ", doc.data());
+            if (doc.id === "attending") {
+                guestMap.attendingArr = doc.data().guestArr;
+            }
+            if (doc.id === "not_attending") {
+                guestMap.not_attendingArr = doc.data().guestArr;
+            }
+        });
+
+        let attendingCount = 0
+        guestMap.attendingArr.forEach((party) => {
+            attendingCount += party.partyCount;
+        })
+
+        //console.log(guestMap)
+        setSeatsTaken(attendingCount)
+
+    }
+
+    // On page load
+    useEffect(() => {
+        getSeatCount();
+    }, [])
+
 
     return (
-        <div>
+        <div className='MainWidth2'>
             <Container className='MainContainer2'>
 
                 {/* Invitation */}
                 <Container className='InvitationContainer'>
                     <Row>
                         <Col style={{ marginBottom: '20px' }}>
-                            <h1 className='FontHeader DetailsHeaderSize'>Melanie's Quinceañera</h1>
+                            <h1 className='FontHeader DetailsHeaderSize HeaderTextShadow'>Melanie's Quinceañera</h1>
                         </Col>
                     </Row>
                     <Row>
@@ -124,96 +155,105 @@ function DetailsEnglish() {
                 {/* Event Details */}
                 <Container className='DetailsContainer'>
                     <Row>
-                        <Col xs={5} className='DetailsContainerCol1'>
-                            <h2 className='FontSubHeader'>Event Details</h2>
+                        <Col xs={12} md={5} className='DetailsContainerCol1'>
+                            <h2 className='FontText'><u>Event Details</u></h2>
                             <List className='FontText'>
-                                <List.Item>
+                                <List.Item className='DetailsListItem'>
                                     <List.Header><List.Icon name='map outline'></List.Icon>Location:</List.Header>525 3rd Street
                                     <br></br>Lake Oswego, OR 97034
                                 </List.Item>
-                                <List.Item>
+                                <List.Item className='DetailsListItem'>
                                     <List.Header><List.Icon name='calendar outline'></List.Icon>Date:</List.Header>December 9th, 2023
                                 </List.Item>
-                                <List.Item>
+                                <List.Item className='DetailsListItem'>
                                     <List.Header><List.Icon name='clock outline'></List.Icon>Time of Event:</List.Header>
                                     3:00pm - 11pm
                                 </List.Item>
-                                <List.Item>
+                                <List.Item className='DetailsListItem'>
                                     <List.Header><List.Icon name='food'></List.Icon>Food Reception:</List.Header>
                                     4:00pm - 6pm
                                 </List.Item>
                             </List>
                         </Col>
 
-                        <Col xs={7} className='DetailsContainerCol2'>
-                            <Image src='./clip-art/town.webp'></Image>
+                        <Col xs={0} md={7} className='DetailsContainerCol2 HideOnMobile'>
+                            <Image className='CropImageTown' src='./clip-art/town.webp'></Image>
                         </Col>
                     </Row>
                 </Container>
-
 
 
                 {/* Form area */}
-                <Container className='FormContainer'>
-                    <Row className='RSVPheader'>
-                        <Col>
-                            <h3 className='FontHeader'>Are you attending?</h3>
-                            <h5 className='FontSubHeader'>RSVP by: <b>November 1st 2023</b></h5>
-                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Divider horizontal className='DividerMain'>
-                                    <Icon name='heart'></Icon>
-                                    <Icon name='heart outline'></Icon>
-                                    <Icon name='heart'></Icon>
-                                </Divider>
-                            </div>
-                            <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
-                            <h5 className='FontText'>{`____ out of ____ guests are attending.`}</h5>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col style={{ justifyContent: 'center', display: 'flex', marginTop: '30px' }}>
-                            <Form className='RSVPform'>
-                                <Form.Field>
-                                    <Input type='text' onChange={(event) => setName(event.target.value)} placeholder='Name' />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Input type='number' onChange={(event) => setPartyCount(event.target.value)} placeholder='Number of persons' />
-                                </Form.Field>
-                                <Form.Field>
-                                    <Input type='email' onChange={(event) => setEmail(event.target.value)} placeholder='E-mail' />
-                                </Form.Field>
-                                <label><b className='FontText'>Will you be attending?</b></label>
-                                <Form.Group style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px' }}>
-                                    <Form.Radio
-                                        className='FontText'
-                                        label='Yes'
-                                        value='yes'
-                                        checked={isAttending === 'yes'}
-                                        onChange={() => setIsAttending('yes')}
-                                    >
-                                    </Form.Radio>
-                                    <Form.Radio
-                                        className='FontText'
-                                        label='No'
-                                        value='no'
-                                        checked={isAttending === 'no'}
-                                        onChange={() => setIsAttending('no')}
-                                    >
-                                    </Form.Radio>
-                                    <Form.Radio
-                                        className='FontText'
-                                        label='Maybe'
-                                        value='maybe'
-                                        checked={isAttending === 'maybe'}
-                                        onChange={() => setIsAttending('maybe')}
-                                    >
-                                    </Form.Radio>
-                                </Form.Group>
-                                <Button style={{ marginTop: '15px', fontFamily: 'Merriweather', backgroundColor: 'white' }} onClick={() => submitRSVP()} type='submit'>Confirm</Button>
-                            </Form>
-                        </Col>
-                    </Row>
-                </Container>
+                {formSubmitted ? (
+                    <Container style={{ paddingBottom: '170px' }} className='FormContainer'>
+                        <Row className='RSVPheader'>
+                            <Col>
+                                <h3 style={{ paddingTop: '120px', marginBottom: '40px' }} className='FontText'>Response Received!</h3>
+                                <Icon style={{ alignSelf: 'center' }} size='massive' name='calendar check outline'></Icon>
+                            </Col>
+                        </Row>
+                    </Container>
+                ) : (
+                    <Container className='FormContainer'>
+                        <Row className='RSVPheader'>
+                            <Col>
+                                <h3 style={{ fontSize: '42px' }} className='FontHeader'>Are you attending?</h3>
+                                <h5 className='FontSubHeader'>RSVP by: <b>November 1st 2023</b></h5>
+                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                    <Divider horizontal className='DividerMain'>
+                                        <Icon name='heart'></Icon>
+                                        <Icon name='heart outline'></Icon>
+                                        <Icon name='heart'></Icon>
+                                    </Divider>
+                                </div>
+                                <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
+                                {warning && (
+                                    <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Please fill out all fields and try again`}</h5>
+                                )}
+                                {!warning && (
+                                    <h5 className='FontText'>There are <span style={{ fontWeight: 'bold' }}>{200 - seatsTaken}</span> seats remaining.</h5>
+                                )}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col style={{ justifyContent: 'center', display: 'flex', marginTop: '30px' }}>
+                                <Form className='RSVPform'>
+                                    <Form.Field>
+                                        <Input type='text' onChange={(event) => setName(event.target.value)} placeholder='Name' />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Input type='number' onChange={(event) => setPartyCount(event.target.value)} placeholder='Number of persons' />
+                                    </Form.Field>
+                                    <Form.Field>
+                                        <Input type='text' onChange={(event) => setEmail(event.target.value)} placeholder='E-mail or Phone #' />
+                                    </Form.Field>
+                                    <label><b className='FontText'>Will you be attending?</b></label>
+                                    <Form.Group style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px' }}>
+                                        <Form.Radio
+                                            className='FontText'
+                                            label='Yes'
+                                            value='yes'
+                                            checked={isAttending === 'yes'}
+                                            onChange={() => setIsAttending('yes')}
+                                        >
+                                        </Form.Radio>
+                                        <Form.Radio
+                                            className='FontText'
+                                            label='No'
+                                            value='no'
+                                            checked={isAttending === 'no'}
+                                            onChange={() => setIsAttending('no')}
+                                        >
+                                        </Form.Radio>
+                                    </Form.Group>
+                                    <Button style={{ marginTop: '15px', fontFamily: 'Merriweather', backgroundColor: 'white' }} onClick={() => submitRSVP()} type='submit'>Confirm</Button>
+                                </Form>
+                            </Col>
+                        </Row>
+                    </Container>
+                )}
+
+                
 
             </Container>
         </div>

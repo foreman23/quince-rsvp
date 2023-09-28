@@ -10,7 +10,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 function Main() {
 
     return (
-        <div className='MainWidth'>
+        <div className='MainWidth1'>
         <Container className='MainContainer'>
                 <Container>
                     <Row>
@@ -23,7 +23,7 @@ function Main() {
                     </Row>
                 </Container>
 
-                <Container className='YoureInvitedContainer'>
+                <Container fluid className='YoureInvitedContainer'>
                     <Row>
                         <Col className='MainContainer'>
                             <h3 className='MainHeaderTop FontSubHeader'>You're Invited to Melanie's Quinceañera!</h3>
