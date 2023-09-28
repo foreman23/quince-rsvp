@@ -263,7 +263,7 @@ html {
 }
 
 .YoureInvitedContainer {
-  margin-top: 22px;
+  margin-top: 12px;
 }
 
 .MainHeaderH1 {
@@ -280,7 +280,8 @@ html {
 }
 
 .ButtonContainer {
-  margin-top: 45px;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
 
 .countdownTimer {
