@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Rancho';
+  src: url(./fonts/Rancho-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Rosario';
+  src: url(./fonts/Rosario-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url(./fonts/Merriweather-Regular.ttf);
+}

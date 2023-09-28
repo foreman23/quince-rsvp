@@ -16,6 +16,7 @@ html {
 
 .FormContainer {
   text-align: center;
+  margin-top: 20px;
   padding-bottom: 50px;
   border-style: solid;
   border-color: #D2D2D2;
@@ -40,20 +41,29 @@ html {
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  margin-top: 6vh;
+  margin-top: 3.5vh;
   align-items: center;
   width: 35vw;
+  background-color: #e6e6e6;
 }
 
 .MainContainer2 {
   display: flex;
   justify-content: center;
-  text-align: start;
+  text-align: center;
   flex-direction: column;
   margin-top: 6vh;
   align-items: center;
   width: 35vw !important;
   background-color: #e6e6e6;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+@media (min-width: 1200px) {
+  .MainWidth {
+    width: 30vw !important;
+  }
 }
 
 .EnglishButton {
@@ -72,6 +82,7 @@ html {
   padding-left: 25px;
   padding-top: 12px;
   padding-bottom: 12px;
+  text-decoration: none;
 }
 
 .EnglishButton:hover {
@@ -101,6 +112,44 @@ html {
   padding-left: 25px;
   padding-top: 12px;
   padding-bottom: 12px;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .EnglishButton {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-color: #D2D2D2;
+    border-radius: 32.5px;
+    border-width: 1px;
+    width: 75vw;
+    color: black;
+    margin-bottom: 20px;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .SpanishButton {
+    display: flex;
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-color: #D2D2D2;
+    border-radius: 32.5px;
+    border-width: 1px;
+    width: 75vw;
+    color: black;
+    padding-right: 25px;
+    padding-left: 25px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .LanguageText {
@@ -133,7 +182,30 @@ html {
 .MainHeaderTop {
   margin-top: 20px;
   color: black;
-  width: 35%;
+  width: 45%;
+}
+
+.MainHeaderBottom {
+  margin-top: 10px;
+  color: black;
+  width: 45%;
+}
+
+@media (max-width: 767px) {
+  .MainHeaderTop {
+    margin-top: 20px;
+    color: black;
+    width: 70%;
+  }
+  .MainHeaderBottom {
+    margin-top: 10px;
+    color: black;
+    width: 70%;
+  }
+}
+
+.YoureInvitedContainer {
+  margin-top: 22px;
 }
 
 .MainHeaderH1 {
@@ -150,7 +222,7 @@ html {
 }
 
 .ButtonContainer {
-  margin-top: 40px;
+  margin-top: 45px;
 }
 
 .countdownTimer {
@@ -178,15 +250,15 @@ html {
   align-items: center;
 }
 
+.DetailsContainerCol2 {
+  padding-right: 0 !important;
+}
+
 .DresscodeContainer {
-  margin-bottom: 40px;
-  text-align: start;
-  margin-left: 55px;
   display: flex;
-  flex-wrap: nowrap;
-  align-items: flex-start;
   border-radius: 5px;
-  text-align: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .BlackText {
@@ -213,7 +285,7 @@ html {
 }
 
 .BackButton:hover {
-  background-color: #5A8F7B !important;
+  background-color: #2eaf58 !important;
   color: white !important;
 }
 
@@ -224,6 +296,18 @@ html {
   text-align: center;
   flex-direction: column;
   margin-bottom: 40px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.ManuelInvitation {
+  margin-top: '30px';
+  margin-bottom: '20px'; 
+  font-size: '24px';
+}
+
+.DetailsHeaderSize {
+  font-size: 74px;
 }
 
 .DresscodeContainer {
@@ -232,6 +316,21 @@ html {
   margin: 50px;
 }
 
+.PleaseWear {
+  margin-left: 30px;
+}
+
+.FontHeader {
+  font-family: 'Rancho';
+}
+
+.FontSubHeader {
+  font-family: 'Rosario';
+}
+
+.FontText {
+  font-family: 'Merriweather';
+}
 
 /* carousel component */
 .embla {

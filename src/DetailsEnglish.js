@@ -77,13 +77,13 @@ function DetailsEnglish() {
                 <Container className='InvitationContainer'>
                     <Row>
                         <Col style={{ marginBottom: '20px' }}>
-                            <h1>MELANIE'S QUINCEAÑERA</h1>
+                            <h1 className='FontHeader DetailsHeaderSize'>Melanie's Quinceañera</h1>
                         </Col>
                     </Row>
                     <Row>
                         <Col><Carousel></Carousel></Col>
                     </Row>
-                    <h2 style={{ marginTop: '30px', marginBottom: '20px' }}>Manuel and Leydiana invite you to celebrate the Quinceañera of their daughter Melanie</h2>
+                    <h2 className='FontSubHeader' style={{ marginTop: '30px', marginBottom: '20px', fontSize: '22px', width: '70%' }}>Manuel and Leydiana invite you to celebrate the Quinceañera of their daughter, Melanie</h2>
                     <Image size='medium' src='./dividers/2.webp'></Image>
                     
                 </Container>
@@ -94,9 +94,9 @@ function DetailsEnglish() {
                     <Row>
                         <Col>
                             <Divider></Divider>
-                            <h2>DATE, TIME & LOCATION</h2>
-                            <h2><b>Saturday, December 9th, 2023 <br></br>3:00pm - 11pm</b></h2>
-                            <h3>525 3rd Street <br></br>Lake Oswego, OR 97034</h3>
+                            <h2 className='FontSubHeader'>DATE, TIME & LOCATION</h2>
+                            <h2 className='FontText'><b>Saturday, December 9th, 2023 <br></br>3:00pm - 11pm</b></h2>
+                            <h3 className='FontText'>525 3rd Street <br></br>Lake Oswego, OR 97034</h3>
                             <Divider></Divider>
                         </Col>
                     </Row>
@@ -104,15 +104,18 @@ function DetailsEnglish() {
 
 
                 {/* Dress Code */}
-                <Container className='DresscodeContainer'>
+                <Container style={{ display: 'flex', justifyContent: 'center', flexDirection: 'row', alignItems: 'center', marginBottom: '60px', marginTop: '35px' }}>
                     <Row>
-                        <Col xs={5}>
-                            <Image className='OutfitsImage' src='./clip-art/outfits.webp'></Image>
+                        <Col>
+                            <Image size='medium' className='OutfitsImage' src='./clip-art/outfits.webp'></Image>
                         </Col>
-                        <Col xs={7}>
-                            <Row>
-                                <Col><h3>Please wear <b className='BlackText'>BLACK</b> and <br></br><b className='GreenText'>FOREST GREEN</b> ONLY<br></br><u>no other colors allowed!</u></h3></Col>
-                            </Row>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Col><h3 className='FontText PleaseWear'>Please wear <b>BLACK</b> and <br></br>
+                                <b style={{ color: '#5A8F7B' }}>FOREST GREEN</b> ONLY</h3>
+                                <h4 className='FontHeader'>- Thank you!</h4>
+                            </Col>
                         </Col>
                     </Row>
                 </Container>
@@ -122,8 +125,8 @@ function DetailsEnglish() {
                 <Container className='DetailsContainer'>
                     <Row>
                         <Col xs={5} className='DetailsContainerCol1'>
-                            <h2>Event Details</h2>
-                            <List>
+                            <h2 className='FontSubHeader'>Event Details</h2>
+                            <List className='FontText'>
                                 <List.Item>
                                     <List.Header><List.Icon name='map outline'></List.Icon>Location:</List.Header>525 3rd Street
                                     <br></br>Lake Oswego, OR 97034
@@ -154,8 +157,8 @@ function DetailsEnglish() {
                 <Container className='FormContainer'>
                     <Row className='RSVPheader'>
                         <Col>
-                            <h3>Are you attending?</h3>
-                            <h5>RSVP by: <b>November 1st 2023</b></h5>
+                            <h3 className='FontHeader'>Are you attending?</h3>
+                            <h5 className='FontSubHeader'>RSVP by: <b>November 1st 2023</b></h5>
                             <div style={{ display: 'flex', justifyContent: 'center' }}>
                                 <Divider horizontal className='DividerMain'>
                                     <Icon name='heart'></Icon>
@@ -163,8 +166,8 @@ function DetailsEnglish() {
                                     <Icon name='heart'></Icon>
                                 </Divider>
                             </div>
-                            <h5>{`We have reserved 200 seats in your honor.`}</h5>
-                            <h5>{`____ out of ____ guests are attending.`}</h5>
+                            <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
+                            <h5 className='FontText'>{`____ out of ____ guests are attending.`}</h5>
                         </Col>
                     </Row>
                     <Row>
@@ -179,9 +182,10 @@ function DetailsEnglish() {
                                 <Form.Field>
                                     <Input type='email' onChange={(event) => setEmail(event.target.value)} placeholder='E-mail' />
                                 </Form.Field>
-                                <label><b>Will you be attending?</b></label>
+                                <label><b className='FontText'>Will you be attending?</b></label>
                                 <Form.Group style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: '10px' }}>
                                     <Form.Radio
+                                        className='FontText'
                                         label='Yes'
                                         value='yes'
                                         checked={isAttending === 'yes'}
@@ -189,6 +193,7 @@ function DetailsEnglish() {
                                     >
                                     </Form.Radio>
                                     <Form.Radio
+                                        className='FontText'
                                         label='No'
                                         value='no'
                                         checked={isAttending === 'no'}
@@ -196,6 +201,7 @@ function DetailsEnglish() {
                                     >
                                     </Form.Radio>
                                     <Form.Radio
+                                        className='FontText'
                                         label='Maybe'
                                         value='maybe'
                                         checked={isAttending === 'maybe'}
@@ -203,7 +209,7 @@ function DetailsEnglish() {
                                     >
                                     </Form.Radio>
                                 </Form.Group>
-                                <Button style={{ marginTop: '15px' }} onClick={() => submitRSVP()} type='submit'>Confirm</Button>
+                                <Button style={{ marginTop: '15px', fontFamily: 'Merriweather', backgroundColor: 'white' }} onClick={() => submitRSVP()} type='submit'>Confirm</Button>
                             </Form>
                         </Col>
                     </Row>
