@@ -17,6 +17,8 @@ function DetailsEnglish() {
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [warning, setWarning] = useState(false);
+    const [warningTooMany, setWarningTooMany] = useState(false);
+    const [limitReached, setLimitReached] = useState(false);
     // Submit RSVP
     const submitRSVP = async () => {
         // Set data map for user response
@@ -31,7 +33,14 @@ function DetailsEnglish() {
         if (name === null || partyCount === null || email === null || isAttending === null) {
             console.log('No null values!')
             setWarning(true);
-            return
+            return;
+        }
+
+        // Check if partyCount exceeds seats remaining
+        if (partyCount > (200 - seatsTaken)) {
+            console.log('Not enough seats!')
+            setWarningTooMany(true);
+            return;
         }
 
         // If user IS attending
@@ -67,7 +76,7 @@ function DetailsEnglish() {
     // Gets seat taken count from firestore
     const [seatsTaken, setSeatsTaken] = useState(null);
     const getSeatCount = async () => {
-        const querySnapshot = await getDocs(collection(firestore, "guests")); 
+        const querySnapshot = await getDocs(collection(firestore, "guests"));
         let guestMap = {
             attendingArr: [],
             not_attendingArr: [],
@@ -85,8 +94,16 @@ function DetailsEnglish() {
 
         let attendingCount = 0
         guestMap.attendingArr.forEach((party) => {
+            console.log(party.partyCount)
             attendingCount += party.partyCount;
+            console.log(attendingCount)
         })
+
+        console.log(attendingCount)
+
+        if (attendingCount < 0) {
+            attendingCount = 0;
+        }
 
         //console.log(guestMap)
         setSeatsTaken(attendingCount)
@@ -115,7 +132,7 @@ function DetailsEnglish() {
                     </Row>
                     <h2 className='FontSubHeader' style={{ marginTop: '30px', marginBottom: '20px', fontSize: '22px', width: '70%' }}>Manuel and Leydiana invite you to celebrate the Quinceañera of their daughter, Melanie</h2>
                     <Image size='medium' src='./dividers/2.webp'></Image>
-                    
+
                 </Container>
 
 
@@ -196,21 +213,28 @@ function DetailsEnglish() {
                     <Container className='FormContainer'>
                         <Row className='RSVPheader'>
                             <Col>
-                                <h3 style={{ fontSize: '42px' }} className='FontHeader'>Are you attending?</h3>
-                                <h5 className='FontSubHeader'>RSVP by: <b>November 1st 2023</b></h5>
-                                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                    <Divider horizontal className='DividerMain'>
-                                        <Icon name='heart'></Icon>
-                                        <Icon name='heart outline'></Icon>
-                                        <Icon name='heart'></Icon>
-                                    </Divider>
+                                <div>
+                                    <h3 style={{ fontSize: '42px' }} className='FontHeader'>Are you attending?</h3>
+                                    <h5 className='FontSubHeader'>RSVP by: <b>November 1st 2023</b></h5>
+                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Divider horizontal className='DividerMain'>
+                                            <Icon name='heart'></Icon>
+                                            <Icon name='heart outline'></Icon>
+                                            <Icon name='heart'></Icon>
+                                        </Divider>
+                                    </div>
+                                    <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
                                 </div>
-                                <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
+
+
                                 {warning && (
                                     <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Please fill out all fields and try again`}</h5>
                                 )}
                                 {!warning && (
                                     <h5 className='FontText'>There are <span style={{ fontWeight: 'bold' }}>{200 - seatsTaken}</span> seats remaining.</h5>
+                                )}
+                                {warningTooMany && (
+                                    <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Not enough seats remaining!`}</h5>
                                 )}
                             </Col>
                         </Row>
@@ -221,7 +245,7 @@ function DetailsEnglish() {
                                         <Input type='text' onChange={(event) => setName(event.target.value)} placeholder='Name' />
                                     </Form.Field>
                                     <Form.Field>
-                                        <Input type='number' onChange={(event) => setPartyCount(event.target.value)} placeholder='Number of persons' />
+                                        <Input type='number' onChange={(event) => setPartyCount(parseInt(event.target.value, 10))} placeholder='Number of persons' />
                                     </Form.Field>
                                     <Form.Field>
                                         <Input type='text' onChange={(event) => setEmail(event.target.value)} placeholder='E-mail or Phone #' />
@@ -252,7 +276,7 @@ function DetailsEnglish() {
                     </Container>
                 )}
 
-                
+
 
             </Container>
         </div>
