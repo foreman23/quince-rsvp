@@ -1,9 +1,8 @@
 import './App.css';
-import { Form, Checkbox, Button, Input, Header, Image, Divider, Icon, List } from 'semantic-ui-react';
+import { Form, Button, Input, Image, Divider, Icon, List } from 'semantic-ui-react';
 import { firestore } from './firebase';
 import { useEffect, useState } from 'react';
-import { arrayUnion, collection, doc, getDoc, updateDoc, getDocs } from 'firebase/firestore';
-import Countdown from 'react-countdown';
+import { arrayUnion, collection, doc, updateDoc, getDocs } from 'firebase/firestore';
 import Carousel from './components/Carousel';
 import { Col, Container, Row } from 'react-bootstrap';
 

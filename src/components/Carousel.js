@@ -1,8 +1,6 @@
 import React from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay'
-import EmblaCarousel from 'embla-carousel'
-
 
 import { Image } from 'semantic-ui-react';
 
