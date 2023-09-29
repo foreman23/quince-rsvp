@@ -18,7 +18,7 @@ function DetailsEnglish() {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [warning, setWarning] = useState(false);
     const [warningTooMany, setWarningTooMany] = useState(false);
-    const [limitReached, setLimitReached] = useState(false);
+    // const [limitReached, setLimitReached] = useState(false);
     // Submit RSVP
     const submitRSVP = async () => {
         // Set data map for user response
