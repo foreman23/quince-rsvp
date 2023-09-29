@@ -17,6 +17,7 @@ function DetailsEnglish() {
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [warning, setWarning] = useState(false);
+    const [warningNegative, setWarningNegative] = useState(false);
     // const [warningTooMany, setWarningTooMany] = useState(false);
     // const [limitReached, setLimitReached] = useState(false);
     // Submit RSVP
@@ -42,6 +43,13 @@ function DetailsEnglish() {
         //     setWarningTooMany(true);
         //     return;
         // }
+
+        // Make sure partyCount is greater than 0
+        if (partyCount <= 0) {
+            setWarningNegative(true);
+            setWarning(false);
+            return;
+        }
 
         // If user IS attending
         if (isAttending === "yes") {
@@ -228,6 +236,9 @@ function DetailsEnglish() {
 
                                 {warning && (
                                     <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Please fill out all fields and try again`}</h5>
+                                )}
+                                {warningNegative && (
+                                    <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Party size must be more than 0`}</h5>
                                 )}
                                 {/* {!warning && (
                                     <h5 className='FontText'>There are <span style={{ fontWeight: 'bold' }}>{200 - seatsTaken}</span> seats remaining.</h5>
