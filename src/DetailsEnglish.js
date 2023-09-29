@@ -17,7 +17,7 @@ function DetailsEnglish() {
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [warning, setWarning] = useState(false);
-    const [warningTooMany, setWarningTooMany] = useState(false);
+    // const [warningTooMany, setWarningTooMany] = useState(false);
     // const [limitReached, setLimitReached] = useState(false);
     // Submit RSVP
     const submitRSVP = async () => {
@@ -36,12 +36,12 @@ function DetailsEnglish() {
             return;
         }
 
-        // Check if partyCount exceeds seats remaining
-        if (partyCount > (200 - seatsTaken)) {
-            console.log('Not enough seats!')
-            setWarningTooMany(true);
-            return;
-        }
+        // // Check if partyCount exceeds seats remaining
+        // if (partyCount > (200 - seatsTaken)) {
+        //     console.log('Not enough seats!')
+        //     setWarningTooMany(true);
+        //     return;
+        // }
 
         // If user IS attending
         if (isAttending === "yes") {
@@ -74,7 +74,7 @@ function DetailsEnglish() {
     }
 
     // Gets seat taken count from firestore
-    const [seatsTaken, setSeatsTaken] = useState(null);
+    // const [seatsTaken, setSeatsTaken] = useState(null);
     const getSeatCount = async () => {
         const querySnapshot = await getDocs(collection(firestore, "guests"));
         let guestMap = {
@@ -105,8 +105,7 @@ function DetailsEnglish() {
             attendingCount = 0;
         }
 
-        //console.log(guestMap)
-        setSeatsTaken(attendingCount)
+        // setSeatsTaken(attendingCount)
 
     }
 
@@ -223,19 +222,19 @@ function DetailsEnglish() {
                                             <Icon name='heart'></Icon>
                                         </Divider>
                                     </div>
-                                    <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5>
+                                    {/* <h5 className='FontText'>{`We have reserved 200 seats in your honor.`}</h5> */}
                                 </div>
 
 
                                 {warning && (
                                     <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Please fill out all fields and try again`}</h5>
                                 )}
-                                {!warning && (
+                                {/* {!warning && (
                                     <h5 className='FontText'>There are <span style={{ fontWeight: 'bold' }}>{200 - seatsTaken}</span> seats remaining.</h5>
-                                )}
-                                {warningTooMany && (
+                                )} */}
+                                {/* {warningTooMany && (
                                     <h5 style={{ fontWeight: 'bold' }} className='FontText'>{`*Not enough seats remaining!`}</h5>
-                                )}
+                                )} */}
                             </Col>
                         </Row>
                         <Row>
