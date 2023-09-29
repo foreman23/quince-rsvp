@@ -13,7 +13,7 @@ function Main() {
                         <Col className='MainContainer'>
                             <h1 className='MainHeaderH1 FontText'>RSVP!</h1>
                             <h3 className='MainHeader FontHeader'>December 9, 2023</h3>
-                            <Image className='MainImage' circular size='medium' src='./portraits/IMG-3316_1.webp' />
+                            <Image className='MainImage' circular size='medium' src='./portraits/5.webp' />
                             <Countdown className='countdownTimer FontText' date={1702162800000} />
                         </Col>
                     </Row>
