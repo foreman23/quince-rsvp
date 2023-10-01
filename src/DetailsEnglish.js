@@ -32,7 +32,6 @@ function DetailsEnglish() {
 
         // First check for all required inputs
         if (name === null || partyCount === null || email === null || isAttending === null) {
-            console.log('No null values!')
             setWarning(true);
             return;
         }
@@ -91,7 +90,6 @@ function DetailsEnglish() {
         }
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            //console.log(doc.id, " => ", doc.data());
             if (doc.id === "attending") {
                 guestMap.attendingArr = doc.data().guestArr;
             }
@@ -102,12 +100,8 @@ function DetailsEnglish() {
 
         let attendingCount = 0
         guestMap.attendingArr.forEach((party) => {
-            console.log(party.partyCount)
             attendingCount += party.partyCount;
-            console.log(attendingCount)
         })
-
-        console.log(attendingCount)
 
         if (attendingCount < 0) {
             attendingCount = 0;
