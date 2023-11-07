@@ -217,7 +217,7 @@ function DetailsSpanish() {
                             <Col>
                                 <div>
                                     <h3 style={{ fontSize: '42px' }} className='FontHeader'>RSVP</h3>
-                                    <h5 className='FontSubHeader'>Confirmar su asistencia antes de: <b>Noviembre 1 2023</b></h5>
+                                    <h5 className='FontSubHeader'>Confirmar su asistencia antes de: <b>Noviembre 20 2023</b></h5>
                                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                                         <Divider horizontal className='DividerMain'>
                                             <Icon name='heart'></Icon>
