@@ -1,84 +1,84 @@
 import './App.css';
-import { Form, Button, Input, Image, Divider, Icon, List } from 'semantic-ui-react';
+import { Image, Divider, List } from 'semantic-ui-react';
 import { firestore } from './firebase';
-import { useEffect, useState } from 'react';
-import { arrayUnion, collection, doc, updateDoc, getDocs } from 'firebase/firestore';
+import { useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
 import Carousel from './components/Carousel';
 import { Col, Container, Row } from 'react-bootstrap';
 
 function DetailsEnglish() {
 
     // State variables for form
-    const [name, setName] = useState(null);
-    const [partyCount, setPartyCount] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [isAttending, setIsAttending] = useState(null);
+    // const [name, setName] = useState(null);
+    // const [partyCount, setPartyCount] = useState(null);
+    // const [email, setEmail] = useState(null);
+    // const [isAttending, setIsAttending] = useState(null);
 
 
-    const [formSubmitted, setFormSubmitted] = useState(false);
-    const [warning, setWarning] = useState(false);
-    const [warningNegative, setWarningNegative] = useState(false);
+    // const [formSubmitted, setFormSubmitted] = useState(false);
+    // const [warning, setWarning] = useState(false);
+    // const [warningNegative, setWarningNegative] = useState(false);
     // const [warningTooMany, setWarningTooMany] = useState(false);
     // const [limitReached, setLimitReached] = useState(false);
     // Submit RSVP
-    const submitRSVP = async () => {
-        // Set data map for user response
-        const formData = {
-            name: name,
-            partyCount: partyCount,
-            email: email,
-            isAttending: isAttending,
-        }
+    // const submitRSVP = async () => {
+    //     // Set data map for user response
+    //     const formData = {
+    //         name: name,
+    //         partyCount: partyCount,
+    //         email: email,
+    //         isAttending: isAttending,
+    //     }
 
-        // First check for all required inputs
-        if (name === null || partyCount === null || email === null || isAttending === null) {
-            setWarning(true);
-            return;
-        }
+    //     // First check for all required inputs
+    //     if (name === null || partyCount === null || email === null || isAttending === null) {
+    //         setWarning(true);
+    //         return;
+    //     }
 
-        // // Check if partyCount exceeds seats remaining
-        // if (partyCount > (200 - seatsTaken)) {
-        //     console.log('Not enough seats!')
-        //     setWarningTooMany(true);
-        //     return;
-        // }
+    //     // // Check if partyCount exceeds seats remaining
+    //     // if (partyCount > (200 - seatsTaken)) {
+    //     //     console.log('Not enough seats!')
+    //     //     setWarningTooMany(true);
+    //     //     return;
+    //     // }
 
-        // Make sure partyCount is greater than 0
-        if (partyCount <= 0) {
-            setWarningNegative(true);
-            setWarning(false);
-            return;
-        }
+    //     // Make sure partyCount is greater than 0
+    //     if (partyCount <= 0) {
+    //         setWarningNegative(true);
+    //         setWarning(false);
+    //         return;
+    //     }
 
-        // If user IS attending
-        if (isAttending === "yes") {
-            const docRef = doc(firestore, "guests", "attending");
-            try {
-                await updateDoc(docRef, {
-                    guestArr: arrayUnion(formData)
-                });
-                setFormSubmitted(true);
-            }
-            catch (error) {
-                console.error("Error adding user RSVP:", error);
-            }
-        }
+    //     // If user IS attending
+    //     if (isAttending === "yes") {
+    //         const docRef = doc(firestore, "guests", "attending");
+    //         try {
+    //             await updateDoc(docRef, {
+    //                 guestArr: arrayUnion(formData)
+    //             });
+    //             setFormSubmitted(true);
+    //         }
+    //         catch (error) {
+    //             console.error("Error adding user RSVP:", error);
+    //         }
+    //     }
 
-        // If user NOT attending
-        if (isAttending === "no") {
-            const docRef = doc(firestore, "guests", "not_attending");
-            try {
-                await updateDoc(docRef, {
-                    guestArr: arrayUnion(formData)
-                });
-                setFormSubmitted(true);
-            }
-            catch (error) {
-                console.error("Error adding user RSVP:", error);
-            }
-        }
+    //     // If user NOT attending
+    //     if (isAttending === "no") {
+    //         const docRef = doc(firestore, "guests", "not_attending");
+    //         try {
+    //             await updateDoc(docRef, {
+    //                 guestArr: arrayUnion(formData)
+    //             });
+    //             setFormSubmitted(true);
+    //         }
+    //         catch (error) {
+    //             console.error("Error adding user RSVP:", error);
+    //         }
+    //     }
 
-    }
+    // }
 
     // Gets seat taken count from firestore
     // const [seatsTaken, setSeatsTaken] = useState(null);
